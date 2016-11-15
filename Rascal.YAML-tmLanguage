@@ -11,4 +11,12 @@ patterns:
 -  name: comment.block.rascal
    begin: "/\\*"
    end: "\\*/"
+-  name: meta.annotation.rascal
+   begin: (@[^ {]+)({)
+   beginCaptures:
+     '1': {name: storage.type.annotation.rascal}
+     '2': {name: punctuation.annotation-argument.begin.rascal}
+   end: (})
+   endCaptures:
+     '1': {name: punctuation.annotation-argument.end.rascal}
 ...

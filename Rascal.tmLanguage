@@ -24,6 +24,35 @@
 			<key>name</key>
 			<string>comment.block.rascal</string>
 		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(@[^ {]+)({)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.annotation.rascal</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.annotation-argument.begin.rascal</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(})</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.annotation-argument.end.rascal</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.annotation.rascal</string>
+		</dict>
 	</array>
 	<key>scopeName</key>
 	<string>source.rascal</string>
