@@ -1,4 +1,6 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
+# Inspired by Official Java Grammar https://github.com/textmate/java.tmbundle
+# Inspired by Idris Grammar https://github.com/idris-hackers/idris-sublime
 ---
 name: Rascal
 scopeName: source.rascal
