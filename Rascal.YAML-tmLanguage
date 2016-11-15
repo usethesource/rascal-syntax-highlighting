@@ -9,6 +9,6 @@ patterns:
 -  name: comment.line.double-slash.rascal
    match: //.*$\n?
 -  name: comment.block.rascal
-   begin: "/*"
-   end: "*/"
+   begin: "/\\*"
+   end: "\\*/"
 ...
