@@ -53,6 +53,42 @@
 			<key>name</key>
 			<string>meta.annotation.rascal</string>
 		</dict>
+		<dict>
+			<key>match</key>
+			<string>(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))</string>
+			<key>name</key>
+			<string>constant.numeric.decimal.rascal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])</string>
+			<key>name</key>
+			<string>constant.numeric.hex.rascal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>0[0-7]+(?![0-9a-z_A-Z])</string>
+			<key>name</key>
+			<string>constant.numeric.octal.rascal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>([0-9]+[dDfF] |[0-9]+[eE][+\-]?[0-9]+[dDfF]? |[0-9]+\.(?!\.)[0-9]*[dDfF]? |[0-9]+\.[0-9]*[eE][+\-]?[0-9]+[dDfF]? |\.(?!\.)[0-9]+[dDfF]? |\.(?!\.)[0-9]+[eE][+\-]?[0-9]+[dDfF]? )</string>
+			<key>name</key>
+			<string>constant.numeric.real.rascal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(true|false)\b</string>
+			<key>name</key>
+			<string>constant.language.bool.rascal</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))</string>
+			<key>name</key>
+			<string>constant.numeric.rational.rascal</string>
+		</dict>
 	</array>
 	<key>scopeName</key>
 	<string>source.rascal</string>

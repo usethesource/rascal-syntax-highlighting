@@ -21,4 +21,22 @@ patterns:
    end: (})
    endCaptures:
      '1': {name: punctuation.annotation-argument.end.rascal}
+-  name: constant.numeric.decimal.rascal
+   match: (0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))
+-  name: constant.numeric.hex.rascal
+   match: 0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])
+-  name: constant.numeric.octal.rascal
+   match: 0[0-7]+(?![0-9a-z_A-Z])
+-  name: constant.numeric.real.rascal
+   match: "([0-9]+[dDfF]
+           |[0-9]+[eE][+\\-]?[0-9]+[dDfF]?
+           |[0-9]+\\.(?!\\.)[0-9]*[dDfF]?
+           |[0-9]+\\.[0-9]*[eE][+\\-]?[0-9]+[dDfF]?
+           |\\.(?!\\.)[0-9]+[dDfF]?
+           |\\.(?!\\.)[0-9]+[eE][+\\-]?[0-9]+[dDfF]?
+           )"
+-  name: constant.language.bool.rascal
+   match: \b(true|false)\b
+-  name: constant.numeric.rational.rascal
+   match: "([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))"
 ...
