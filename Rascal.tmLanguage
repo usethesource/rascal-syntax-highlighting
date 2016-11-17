@@ -94,8 +94,20 @@
 			<string>\'</string>
 			<key>end</key>
 			<string>\'</string>
+			<key>include</key>
+			<string>#string_escape</string>
 			<key>name</key>
 			<string>string.quoted.single.rascal</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\"</string>
+			<key>end</key>
+			<string>\"</string>
+			<key>include</key>
+			<string>#string_escape</string>
+			<key>name</key>
+			<string>string.quoted.double.rascal</string>
 		</dict>
 		<dict>
 			<key>begin</key>

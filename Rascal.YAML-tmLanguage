@@ -36,6 +36,11 @@ patterns:
 -  name: string.quoted.single.rascal
    begin: \'
    end: \'
+   include: '#string_escape'
+-  name: string.quoted.double.rascal
+   begin: \"
+   end: \"
+   include: '#string_escape'
    # TODO Add complex strings here
 -  name: string.other.datetime.rascal
    begin: \\$
