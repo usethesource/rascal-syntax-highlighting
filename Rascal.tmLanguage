@@ -91,9 +91,9 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\'</string>
+			<string>[^\\]'</string>
 			<key>end</key>
-			<string>\'</string>
+			<string>[^\\]'</string>
 			<key>include</key>
 			<string>#string_escape</string>
 			<key>name</key>
@@ -101,9 +101,9 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\"</string>
+			<string>[^\\]"</string>
 			<key>end</key>
-			<string>\"</string>
+			<string>[^\\]"</string>
 			<key>include</key>
 			<string>#string_escape</string>
 			<key>name</key>
