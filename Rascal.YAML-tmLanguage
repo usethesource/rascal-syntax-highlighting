@@ -27,6 +27,20 @@ patterns:
    match: 0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])
 -  name: constant.numeric.octal.rascal
    match: 0[0-7]+(?![0-9a-z_A-Z])
+-  name: string.regexp.rascal
+   begin: /
+   end: /([dims]*)
+   endCaptures:
+     '1': {name: storage.modifier.regex.rascal}
+   include: '#regex_escape'
+-  name: string.quoted.single.rascal
+   begin: \'
+   end: \'
+   # TODO Add complex strings here
+-  name: string.other.datetime.rascal
+   begin: \\$
+   end: \\$
+   # TODO Add protocol literals here
 -  name: constant.numeric.real.rascal
    match: "([0-9]+[dDfF]
            |[0-9]+[eE][+\\-]?[0-9]+[dDfF]?
@@ -39,4 +53,18 @@ patterns:
    match: \b(true|false)\b
 -  name: constant.numeric.rational.rascal
    match: "([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))"
+repository:
+  regex_escape:
+  - name: constant.character.escape.regex.rascal
+    match: "\\\\(/|<|>|\\)"
+  string_escape:
+  - name: constant.character.escape.ordinary.rascal
+    match: "\\\\(\\\"|'|<|>|\\|[bnfrt])"
+  - name: constant.character.escape.unicode.rascal
+    match: "\\\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+                |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+                |a[0-7][0-9A-Fa-f]
+                )"
+  - name: storage.modifier.string.margin.rascal
+    match: \\n\\s*\'
 ...
