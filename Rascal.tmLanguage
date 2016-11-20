@@ -1,177 +1,126 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>fileTypes</key>
-	<array>
-		<string>rsc</string>
-	</array>
-	<key>name</key>
-	<string>Rascal</string>
-	<key>patterns</key>
-	<array>
-		<dict>
-			<key>match</key>
-			<string>//.*$\n?</string>
-			<key>name</key>
-			<string>comment.line.double-slash.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>/\*</string>
-			<key>end</key>
-			<string>\*/</string>
-			<key>name</key>
-			<string>comment.block.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(@[^ {]+)({)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.type.annotation.rascal</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.annotation-argument.begin.rascal</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(})</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.annotation-argument.end.rascal</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.annotation.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))</string>
-			<key>name</key>
-			<string>constant.numeric.decimal.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])</string>
-			<key>name</key>
-			<string>constant.numeric.hex.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>0[0-7]+(?![0-9a-z_A-Z])</string>
-			<key>name</key>
-			<string>constant.numeric.octal.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>/</string>
-			<key>end</key>
-			<string>/([dims]*)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.modifier.regex.rascal</string>
-				</dict>
-			</dict>
-			<key>include</key>
-			<string>#regex_escape</string>
-			<key>name</key>
-			<string>string.regexp.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\'</string>
-			<key>end</key>
-			<string>\'</string>
-			<key>include</key>
-			<string>#string_escape</string>
-			<key>name</key>
-			<string>string.quoted.single.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\"</string>
-			<key>end</key>
-			<string>\"</string>
-			<key>include</key>
-			<string>#string_escape</string>
-			<key>name</key>
-			<string>string.quoted.double.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\\$</string>
-			<key>end</key>
-			<string>\\$</string>
-			<key>name</key>
-			<string>string.other.datetime.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>([0-9]+[dDfF] |[0-9]+[eE][+\-]?[0-9]+[dDfF]? |[0-9]+\.(?!\.)[0-9]*[dDfF]? |[0-9]+\.[0-9]*[eE][+\-]?[0-9]+[dDfF]? |\.(?!\.)[0-9]+[dDfF]? |\.(?!\.)[0-9]+[eE][+\-]?[0-9]+[dDfF]? )</string>
-			<key>name</key>
-			<string>constant.numeric.real.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(true|false)\b</string>
-			<key>name</key>
-			<string>constant.language.bool.rascal</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))</string>
-			<key>name</key>
-			<string>constant.numeric.rational.rascal</string>
-		</dict>
-	</array>
-	<key>repository</key>
-	<dict>
-		<key>regex_escape</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>\\(/|&lt;|&gt;|\)</string>
-				<key>name</key>
-				<string>constant.character.escape.regex.rascal</string>
-			</dict>
-		</array>
-		<key>string_escape</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>\\(\"|'|&lt;|&gt;|\|[bnfrt])</string>
-				<key>name</key>
-				<string>constant.character.escape.ordinary.rascal</string>
-			</dict>
-			<dict>
-				<key>match</key>
-				<string>\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |a[0-7][0-9A-Fa-f] )</string>
-				<key>name</key>
-				<string>constant.character.escape.unicode.rascal</string>
-			</dict>
-			<dict>
-				<key>match</key>
-				<string>\\n\\s*\'</string>
-				<key>name</key>
-				<string>storage.modifier.string.margin.rascal</string>
-			</dict>
-		</array>
-	</dict>
-	<key>scopeName</key>
-	<string>source.rascal</string>
-	<key>uuid</key>
-	<string>6d5574d4-85af-4e00-9f3c-9b5fa60f53b8</string>
-</dict>
-</plist>
+{
+    "fileTypes": [
+        "rsc"
+    ], 
+    "name": "Rascal", 
+    "patterns": [
+        {
+            "match": "//.*$\\n?", 
+            "name": "comment.line.double-slash.rascal"
+        }, 
+        {
+            "end": "\\*/", 
+            "name": "comment.block.rascal", 
+            "begin": "/\\*"
+        }, 
+        {
+            "begin": "(@[^ {]+)({)", 
+            "end": "(})", 
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.annotation-argument.end.rascal"
+                }
+            }, 
+            "name": "meta.annotation.rascal", 
+            "beginCaptures": {
+                "2": {
+                    "name": "punctuation.annotation-argument.begin.rascal"
+                }, 
+                "1": {
+                    "name": "storage.type.annotation.rascal"
+                }
+            }
+        }, 
+        {
+            "match": "(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))", 
+            "name": "constant.numeric.decimal.rascal"
+        }, 
+        {
+            "match": "0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])", 
+            "name": "constant.numeric.hex.rascal"
+        }, 
+        {
+            "match": "0[0-7]+(?![0-9a-z_A-Z])", 
+            "name": "constant.numeric.octal.rascal"
+        }, 
+        {
+            "begin": "/", 
+            "end": "/([dims]*)", 
+            "endCaptures": {
+                "1": {
+                    "name": "storage.modifier.regex.rascal"
+                }
+            }, 
+            "name": "string.regexp.rascal", 
+            "include": "#regex_escape"
+        }, 
+        {
+            "end": "\\'", 
+            "name": "string.quoted.single.rascal", 
+            "begin": "\\'", 
+            "include": "#string_escape"
+        }, 
+        {
+            "end": "\\\"", 
+            "name": "string.quoted.double.rascal", 
+            "begin": "\\\"", 
+            "include": "#string_interpolation"
+        }, 
+        {
+            "end": "\\\\$", 
+            "name": "string.other.datetime.rascal", 
+            "begin": "\\\\$"
+        }, 
+        {
+            "match": "([0-9]+[dDfF] |[0-9]+[eE][+\\-]?[0-9]+[dDfF]? |[0-9]+\\.(?!\\.)[0-9]*[dDfF]? |[0-9]+\\.[0-9]*[eE][+\\-]?[0-9]+[dDfF]? |\\.(?!\\.)[0-9]+[dDfF]? |\\.(?!\\.)[0-9]+[eE][+\\-]?[0-9]+[dDfF]? )", 
+            "name": "constant.numeric.real.rascal"
+        }, 
+        {
+            "match": "\\b(true|false)\\b", 
+            "name": "constant.language.bool.rascal"
+        }, 
+        {
+            "match": "([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))", 
+            "name": "constant.numeric.rational.rascal"
+        }, 
+        {
+            "match": "\\b(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start)\\b", 
+            "name": "keyword.control.rascal"
+        }, 
+        {
+            "match": "\\b(value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)\\b", 
+            "name": "support.type.basic.rascal"
+        }
+    ], 
+    "repository": {
+        "regex_escape": [
+            {
+                "match": "\\\\(/|<|>|\\)", 
+                "name": "constant.character.escape.regex.rascal"
+            }
+        ], 
+        "string_escape": [
+            {
+                "match": "\\\\(\\\"|'|<|>|\\|[bnfrt])", 
+                "name": "constant.character.escape.ordinary.rascal"
+            }, 
+            {
+                "match": "\\\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |a[0-7][0-9A-Fa-f] )", 
+                "name": "constant.character.escape.unicode.rascal"
+            }, 
+            {
+                "match": "\\\\n\\\\s*\\'", 
+                "name": "storage.modifier.string.margin.rascal"
+            }
+        ], 
+        "string_interpolation": [
+            {
+                "end": ">", 
+                "name": "entity.interpolated-string.rascal", 
+                "begin": "<"
+            }
+        ]
+    }, 
+    "scopeName": "source.rascal", 
+    "uuid": "6d5574d4-85af-4e00-9f3c-9b5fa60f53b8"
+}

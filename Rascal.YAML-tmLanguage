@@ -41,7 +41,7 @@ patterns:
    begin: \"
    end: \"
    include: '#string_escape'
-   # TODO Add complex strings here
+   include: '#string_interpolation'
 -  name: string.other.datetime.rascal
    begin: \\$
    end: \\$
@@ -58,6 +58,10 @@ patterns:
    match: \b(true|false)\b
 -  name: constant.numeric.rational.rascal
    match: "([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))"
+-  name: keyword.control.rascal
+   match: '\b(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start)\b'
+-  name: support.type.basic.rascal
+   match: '\b(value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)\b'
 repository:
   regex_escape:
   - name: constant.character.escape.regex.rascal
@@ -72,4 +76,8 @@ repository:
                 )"
   - name: storage.modifier.string.margin.rascal
     match: \\n\\s*\'
+  string_interpolation:
+  - name: entity.interpolated-string.rascal
+    begin: "<"
+    end: ">"
 ...
