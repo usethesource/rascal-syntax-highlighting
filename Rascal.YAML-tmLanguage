@@ -65,15 +65,15 @@ patterns:
 repository:
   regex_escape:
   - name: constant.character.escape.regex.rascal
-    match: "\\\\(/|<|>|\\)"
+    match: "\\(/|<|>|\\)"
   string_escape:
   - name: constant.character.escape.ordinary.rascal
-    match: "\\\\(\\\"|'|<|>|\\|[bnfrt])"
+    match: "\\(\"|'|<|>|\\|[bnfrt])"
   - name: constant.character.escape.unicode.rascal
-    match: "\\\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
-                |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
-                |a[0-7][0-9A-Fa-f]
-                )"
+    match: "\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+              |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+              |a[0-7][0-9A-Fa-f]
+              )"
   - name: storage.modifier.string.margin.rascal
     match: \\n\\s*\'
   string_interpolation:
