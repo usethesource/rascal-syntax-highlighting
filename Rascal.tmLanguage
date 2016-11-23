@@ -84,30 +84,15 @@
 					<string>storage.modifier.regex.rascal</string>
 				</dict>
 			</dict>
-			<key>include</key>
-			<string>#regex_escape</string>
 			<key>name</key>
 			<string>string.regexp.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\'</string>
-			<key>end</key>
-			<string>\'</string>
-			<key>include</key>
-			<string>#string_escape</string>
-			<key>name</key>
-			<string>string.quoted.single.rascal</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\"</string>
-			<key>end</key>
-			<string>\"</string>
-			<key>include</key>
-			<string>#string_interpolation</string>
-			<key>name</key>
-			<string>string.quoted.double.rascal</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#regex_escape</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -147,50 +132,104 @@
 			<key>name</key>
 			<string>support.type.basic.rascal</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#string</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
 		<key>regex_escape</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>\(/|&lt;|&gt;|\)</string>
-				<key>name</key>
-				<string>constant.character.escape.regex.rascal</string>
-			</dict>
-		</array>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\(/|&lt;|&gt;|\\)</string>
+					<key>name</key>
+					<string>constant.character.escape.regex.rascal</string>
+				</dict>
+			</array>
+		</dict>
+		<key>string</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>'</string>
+					<key>end</key>
+					<string>'</string>
+					<key>name</key>
+					<string>string.quoted.single.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_escape</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>"</string>
+					<key>end</key>
+					<string>"</string>
+					<key>name</key>
+					<string>string.quoted.double.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_escape</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string_interpolation</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 		<key>string_escape</key>
-		<array>
-			<dict>
-				<key>match</key>
-				<string>\("|'|&lt;|&gt;|\|[bnfrt])</string>
-				<key>name</key>
-				<string>constant.character.escape.ordinary.rascal</string>
-			</dict>
-			<dict>
-				<key>match</key>
-				<string>\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |a[0-7][0-9A-Fa-f] )</string>
-				<key>name</key>
-				<string>constant.character.escape.unicode.rascal</string>
-			</dict>
-			<dict>
-				<key>match</key>
-				<string>\\n\\s*\'</string>
-				<key>name</key>
-				<string>storage.modifier.string.margin.rascal</string>
-			</dict>
-		</array>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\(\"|'|&lt;|&gt;|\\|[bnfrt])</string>
+					<key>name</key>
+					<string>constant.character.escape.ordinary.rascal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f] |a[0-7][0-9A-Fa-f] )</string>
+					<key>name</key>
+					<string>constant.character.escape.unicode.rascal</string>
+				</dict>
+			</array>
+		</dict>
 		<key>string_interpolation</key>
-		<array>
-			<dict>
-				<key>begin</key>
-				<string>&lt;</string>
-				<key>end</key>
-				<string>&gt;</string>
-				<key>name</key>
-				<string>entity.interpolated-string.rascal</string>
-			</dict>
-		</array>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>&lt;</string>
+					<key>end</key>
+					<string>&gt;</string>
+					<key>name</key>
+					<string>entity.interpolated-string.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 	</dict>
 	<key>scopeName</key>
 	<string>source.rascal</string>

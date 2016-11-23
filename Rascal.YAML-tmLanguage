@@ -32,16 +32,8 @@ patterns:
    end: /([dims]*)
    endCaptures:
      '1': {name: storage.modifier.regex.rascal}
-   include: '#regex_escape'
--  name: string.quoted.single.rascal
-   begin: \'
-   end: \'
-   include: '#string_escape'
--  name: string.quoted.double.rascal
-   begin: \"
-   end: \"
-   include: '#string_escape'
-   include: '#string_interpolation'
+   patterns:
+   - include: '#regex_escape'
 -  name: string.other.datetime.rascal
    begin: \\$
    end: \\$
@@ -62,22 +54,39 @@ patterns:
    match: '\b(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start)\b'
 -  name: support.type.basic.rascal
    match: '\b(value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)\b'
+-  include: '#string'
 repository:
+  string:
+    patterns:
+      -  name: string.quoted.single.rascal
+         begin: "'"
+         end: "'"
+         patterns:
+         - include: '#string_escape'
+      -  name: string.quoted.double.rascal
+         begin: "\""
+         end: "\""
+         patterns:
+         - include: '#string_escape'
+         - include: '#string_interpolation'
   regex_escape:
-  - name: constant.character.escape.regex.rascal
-    match: "\\(/|<|>|\\)"
+    patterns:
+      - name: constant.character.escape.regex.rascal
+        match: \\(/|<|>|\\)
   string_escape:
-  - name: constant.character.escape.ordinary.rascal
-    match: "\\(\"|'|<|>|\\|[bnfrt])"
-  - name: constant.character.escape.unicode.rascal
-    match: "\\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
-              |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
-              |a[0-7][0-9A-Fa-f]
-              )"
-  - name: storage.modifier.string.margin.rascal
-    match: \\n\\s*\'
+    patterns:
+      - name: constant.character.escape.ordinary.rascal
+        match: \\(\"|'|<|>|\\|[bnfrt])
+      - name: constant.character.escape.unicode.rascal
+        match: \\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+                 |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
+                 |a[0-7][0-9A-Fa-f]
+                 )
   string_interpolation:
-  - name: entity.interpolated-string.rascal
-    begin: "<"
-    end: ">"
+    patterns:
+      - name: entity.interpolated-string.rascal
+        begin: "<"
+        end: ">"
+        patterns:
+        - include: '#string'
 ...
