@@ -75,7 +75,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\\(\"|'|&lt;|&gt;|\\|[bnfrt])</string>
+					<string>(/|\\(\"|\'|&lt;|&gt;|\\|[bnfrt]))</string>
 					<key>name</key>
 					<string>constant.character.escape.ordinary.rascal</string>
 				</dict>
@@ -93,13 +93,34 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>&lt;</string>
+					<string>(&lt;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.interpolation.begin.rascal</string>
+						</dict>
+					</dict>
 					<key>end</key>
-					<string>&gt;</string>
+					<string>(&gt;)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.interpolation.end.rascal</string>
+						</dict>
+					</dict>
 					<key>name</key>
-					<string>entity.interpolated-string.rascal</string>
+					<string>support.interpolated-string.rascal</string>
 					<key>patterns</key>
-					<false/>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#top_level</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -158,44 +179,21 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))</string>
+					<string>(?&lt;![A-Za-z_])(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))</string>
 					<key>name</key>
 					<string>constant.numeric.decimal.rascal</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])</string>
+					<string>(?&lt;![A-Za-z_])0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])</string>
 					<key>name</key>
 					<string>constant.numeric.hex.rascal</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>0[0-7]+(?![0-9a-z_A-Z])</string>
+					<string>(?&lt;![A-Za-z_])0[0-7]+(?![0-9a-z_A-Z])</string>
 					<key>name</key>
 					<string>constant.numeric.octal.rascal</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>/</string>
-					<key>end</key>
-					<string>/([dims]*)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.modifier.regex.rascal</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>string.regexp.rascal</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#regex_escape</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -207,7 +205,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>([0-9]+[dDfF] |[0-9]+[eE][+\-]?[0-9]+[dDfF]? |[0-9]+\.(?!\.)[0-9]*[dDfF]? |[0-9]+\.[0-9]*[eE][+\-]?[0-9]+[dDfF]? |\.(?!\.)[0-9]+[dDfF]? |\.(?!\.)[0-9]+[eE][+\-]?[0-9]+[dDfF]? )</string>
+					<string>(?&lt;![A-Za-z_]) ([0-9]+[dDfF] |[0-9]+[eE][+\-]?[0-9]+[dDfF]? |[0-9]+\.(?!\.)[0-9]*[dDfF]? |[0-9]+\.[0-9]*[eE][+\-]?[0-9]+[dDfF]? |\.(?!\.)[0-9]+[dDfF]? |\.(?!\.)[0-9]+[eE][+\-]?[0-9]+[dDfF]? )</string>
 					<key>name</key>
 					<string>constant.numeric.real.rascal</string>
 				</dict>
@@ -219,7 +217,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))</string>
+					<string>(?&lt;![A-Za-z_])([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))</string>
 					<key>name</key>
 					<string>constant.numeric.rational.rascal</string>
 				</dict>
@@ -236,14 +234,30 @@
 					<string>support.type.basic.rascal</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>\b[A-Z][A-Za-z_0-9]\b</string>
-					<key>name</key>
-					<string>variable.language.rascal</string>
-				</dict>
-				<dict>
 					<key>include</key>
 					<string>#string</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b[a-zA-Z][A-Za-z_0-9]*\b</string>
+					<key>name</key>
+					<string>variable.other.ordinary.rascal</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\\(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start|value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)</string>
+					<key>name</key>
+					<string>variable.other.escaped-keyword.rascal</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\[</string>
+					<key>end</key>
+					<string>\]</string>
+					<key>include</key>
+					<string>#string_escape</string>
+					<key>name</key>
+					<string>string.other.lexicalcharset.rascal</string>
 				</dict>
 			</array>
 		</dict>

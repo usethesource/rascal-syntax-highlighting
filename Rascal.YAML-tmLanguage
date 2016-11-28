@@ -1,6 +1,9 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
 # Inspired by Official Java Grammar https://github.com/textmate/java.tmbundle
 # Inspired by Idris Grammar https://github.com/idris-hackers/idris-sublime
+# CONTRIBUTORS:
+# Ahmad Salim Al-Sibahi
+# Niklas Larsson
 ---
 name: Rascal
 scopeName: source.rascal
@@ -28,24 +31,26 @@ repository:
     -  name: meta.annotation.inline.rascal
        match: (@[A-Za-z_0-9])
     -  name: constant.numeric.decimal.rascal
-       match: (0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))
+       match: (?<![A-Za-z_])(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))
     -  name: constant.numeric.hex.rascal
-       match: 0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])
+       match: (?<![A-Za-z_])0[Xx][0-9A-Fa-f]+(?![0-9a-z_A-Z])
     -  name: constant.numeric.octal.rascal
-       match: 0[0-7]+(?![0-9a-z_A-Z])
-    -  name: string.regexp.rascal
-       begin: /
-       end: /([dims]*)
-       endCaptures:
-         '1': {name: storage.modifier.regex.rascal}
-       patterns:
-       - include: '#regex_escape'
+       match: (?<![A-Za-z_])0[0-7]+(?![0-9a-z_A-Z])
+    # -  name: string.regexp.rascal
+    #    begin: /
+    #    end: /([dims]*)
+    #    endCaptures:
+    #      '1': {name: storage.modifier.regex.rascal}
+    #    patterns:
+    #    - include: '#regex_escape'
+    #    - include: '#string_interpolation'
     -  name: string.other.datetime.rascal
        begin: \\$
        end: \\$
        # TODO Add protocol literals here
     -  name: constant.numeric.real.rascal
-       match: "([0-9]+[dDfF]
+       match: "(?<![A-Za-z_])
+               ([0-9]+[dDfF]
                |[0-9]+[eE][+\\-]?[0-9]+[dDfF]?
                |[0-9]+\\.(?!\\.)[0-9]*[dDfF]?
                |[0-9]+\\.[0-9]*[eE][+\\-]?[0-9]+[dDfF]?
@@ -55,14 +60,20 @@ repository:
     -  name: constant.language.bool.rascal
        match: \b(true|false)\b
     -  name: constant.numeric.rational.rascal
-       match: "([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))"
+       match: "(?<![A-Za-z_])([0-9][0-9]*r|[1-9][0-9]*r[0-9][0-9]*(?![0-9a-z_A-Z]))"
     -  name: keyword.control.rascal
        match: '\b(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start)\b'
     -  name: support.type.basic.rascal
        match: '\b(value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)\b'
-    -  name: variable.language.rascal
-       match: '\b[A-Z][A-Za-z_0-9]\b'
     -  include: '#string'
+    -  name: variable.other.ordinary.rascal
+       match: '\b[a-zA-Z][A-Za-z_0-9]*\b'
+    -  name: variable.other.escaped-keyword.rascal
+       match: '\\(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start|value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)'
+    -  name: string.other.lexicalcharset.rascal
+       begin: '\['
+       end: '\]'
+       include: '#string_escape'
   string:
     patterns:
       -  name: string.quoted.single.rascal
@@ -83,7 +94,7 @@ repository:
   string_escape:
     patterns:
       - name: constant.character.escape.ordinary.rascal
-        match: \\(\"|'|<|>|\\|[bnfrt])
+        match: (/|\\(\"|\'|<|>|\\|[bnfrt]))
       - name: constant.character.escape.unicode.rascal
         match: \\(u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
                  |U(0[0-9 A-F a-f]|10)[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]
@@ -91,8 +102,13 @@ repository:
                  )
   string_interpolation:
     patterns:
-      - name: entity.interpolated-string.rascal
-        begin: "<"
-        end: ">"
+      - name: support.interpolated-string.rascal
+        begin: (<)
+        beginCaptures:
+          '1': {name: punctuation.interpolation.begin.rascal}
+        end: (>)
+        endCaptures:
+          '2': {name: punctuation.interpolation.end.rascal}
         patterns:
+        - include: '#top_level'
 ...
