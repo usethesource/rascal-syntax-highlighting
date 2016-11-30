@@ -1,2 +1,1 @@
-# rascal-grammar
-TM Bundle for syntax highlighting Rascal code
+Syntax highlighting Rascal in different editors.
