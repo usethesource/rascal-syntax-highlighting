@@ -77,6 +77,10 @@ repository:
        patterns:
        - include: '#regex_escape'
        - include: '#string_interpolation'
+    - name: string.other.url.rascal
+      match: "\\|([0-9a-z_A-Z.-_~:/?#\\[\\]@!$&'()*+,;=`])+\\|" # 
+      captures:
+        '1': {name: markup.underline.link.rascal}
   string:
     patterns:
       -  name: string.quoted.single.rascal
