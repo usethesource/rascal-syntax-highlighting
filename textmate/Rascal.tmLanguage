@@ -17,6 +17,129 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>annotation</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(@[^ {]+)({)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.annotation.block.rascal</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.annotation-argument.begin.rascal</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(})</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.annotation-argument.end.rascal</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.annotation.block.rascal</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.annotation.inline.rascal</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(@[A-Za-z_0-9]+)</string>
+					<key>name</key>
+					<string>meta.annotation.inline.rascal</string>
+				</dict>
+			</array>
+		</dict>
+		<key>char_set</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\[</string>
+					<key>end</key>
+					<string>\]</string>
+					<key>name</key>
+					<string>punctuation.other.lexicalcharset.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_escape</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>comment</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>//.*$\n?</string>
+					<key>name</key>
+					<string>comment.line.double-slash.rascal</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>/\*</string>
+					<key>end</key>
+					<string>\*/</string>
+					<key>name</key>
+					<string>comment.block.rascal</string>
+				</dict>
+			</array>
+		</dict>
+		<key>regex</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>/(?!/|*)</string>
+					<key>end</key>
+					<string>/([dims]*)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.regex.rascal</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.regexp.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#regex_escape</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string_interpolation</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 		<key>regex_escape</key>
 		<dict>
 			<key>patterns</key>
@@ -160,61 +283,48 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>//.*$\n?</string>
-					<key>name</key>
-					<string>comment.line.double-slash.rascal</string>
-				</dict>
-				<dict>
 					<key>begin</key>
-					<string>/\*</string>
-					<key>end</key>
-					<string>\*/</string>
-					<key>name</key>
-					<string>comment.block.rascal</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(@[^ {]+)({)</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.type.annotation.block.rascal</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.annotation-argument.begin.rascal</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(})</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.annotation-argument.end.rascal</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>meta.annotation.block.rascal</string>
-				</dict>
-				<dict>
+					<string>(lexical|syntax)\s+([a-zA-Z][A-Za-z_0-9]*)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.type.annotation.inline.rascal</string>
+							<string>keyword.control.rascal</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.rascal</string>
 						</dict>
 					</dict>
-					<key>match</key>
-					<string>(@[A-Za-z_0-9]+)</string>
+					<key>end</key>
+					<string>;</string>
 					<key>name</key>
-					<string>meta.annotation.inline.rascal</string>
+					<string>punctuation.other.syntactic.rascal</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#char_set</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#annotation</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -277,6 +387,18 @@
 					<string>#string</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#regex</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#annotation</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
 					<key>match</key>
 					<string>\b[a-zA-Z][A-Za-z_0-9]*\b</string>
 					<key>name</key>
@@ -287,48 +409,6 @@
 					<string>\\(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start|value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)</string>
 					<key>name</key>
 					<string>variable.other.escaped-keyword.rascal</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\[</string>
-					<key>end</key>
-					<string>\]</string>
-					<key>name</key>
-					<string>punctuation.other.lexicalcharset.rascal</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#string_escape</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>/</string>
-					<key>end</key>
-					<string>/([dims]*)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.modifier.regex.rascal</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>string.regexp.rascal</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#regex_escape</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#string_interpolation</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>captures</key>

@@ -15,23 +15,18 @@ patterns:
 repository:
   top_level:
     patterns:
-    -  name: comment.line.double-slash.rascal
-       match: //.*$\n?
-    -  name: comment.block.rascal
-       begin: "/\\*"
-       end: "\\*/"
-    -  name: meta.annotation.block.rascal
-       begin: (@[^ {]+)({)
-       beginCaptures:
-         '1': {name: storage.type.annotation.block.rascal}
-         '2': {name: punctuation.annotation-argument.begin.rascal}
-       end: (})
-       endCaptures:
-         '1': {name: punctuation.annotation-argument.end.rascal}
-    -  name: meta.annotation.inline.rascal
-       match: (@[A-Za-z_0-9]+)
-       captures:
-         '1': {name: storage.type.annotation.inline.rascal}
+    - name: punctuation.other.syntactic.rascal
+      begin: "(lexical|syntax)\\s+([a-zA-Z][A-Za-z_0-9]*)"
+      end: ;
+      captures:
+        '1': {name: keyword.control.rascal}
+        '2': {name: entity.name.type.rascal}
+      patterns:
+      - include: '#char_set'
+      - include: '#string'
+      - include: '#comment'
+      - include: '#regex'
+      - include: '#annotation'
     -  name: constant.numeric.decimal.rascal
        match: (?<![A-Za-z_])(0(?![0-9a-z_A-Z])|[1-9][0-9]*(?![0-9a-z_A-Z]))
     -  name: constant.numeric.hex.rascal
@@ -60,27 +55,41 @@ repository:
     -  name: support.type.basic.rascal
        match: '\b(value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)\b'
     -  include: '#string'
+    -  include: '#regex'
+    -  include: '#annotation'
+    -  include: '#comment'
     -  name: variable.other.ordinary.rascal
        match: '\b[a-zA-Z][A-Za-z_0-9]*\b'
     -  name: variable.other.escaped-keyword.rascal
        match: '\\(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start|value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)'
-    -  name: punctuation.other.lexicalcharset.rascal
-       begin: '\['
-       end: '\]'
-       patterns:
-       - include: '#string_escape'
+    -  name: string.other.url.rascal
+       match: "\\|([0-9a-z_A-Z.-_~:/?#\\[\\]@!$&'()*+,;=`])+\\|" # 
+       captures:
+         '1': {name: markup.underline.link.rascal}
+  comment:
+    patterns:
+    -  name: comment.line.double-slash.rascal
+       match: //.*$\n?
+    -  name: comment.block.rascal
+       begin: "/\\*"
+       end: "\\*/"
+  char_set:
+    patterns:
+      -  name: punctuation.other.lexicalcharset.rascal
+         begin: '\['
+         end: '\]'
+         patterns:
+         - include: '#string_escape'
+  regex:
+    patterns:
     -  name: string.regexp.rascal
-       begin: /
+       begin: /(?!/|*)
        end: /([dims]*)
        endCaptures:
          '1': {name: storage.modifier.regex.rascal}
        patterns:
        - include: '#regex_escape'
        - include: '#string_interpolation'
-    - name: string.other.url.rascal
-      match: "\\|([0-9a-z_A-Z.-_~:/?#\\[\\]@!$&'()*+,;=`])+\\|" # 
-      captures:
-        '1': {name: markup.underline.link.rascal}
   string:
     patterns:
       -  name: string.quoted.single.rascal
@@ -100,6 +109,20 @@ repository:
          patterns:
          - include: '#string_interpolation'
          - include: '#syntax_escape'
+  annotation:
+    patterns:
+    -  name: meta.annotation.block.rascal
+       begin: (@[^ {]+)({)
+       beginCaptures:
+         '1': {name: storage.type.annotation.block.rascal}
+         '2': {name: punctuation.annotation-argument.begin.rascal}
+       end: (})
+       endCaptures:
+         '1': {name: punctuation.annotation-argument.end.rascal}
+    -  name: meta.annotation.inline.rascal
+       match: (@[A-Za-z_0-9]+)
+       captures:
+         '1': {name: storage.type.annotation.inline.rascal}
   regex_escape:
     patterns:
       - name: constant.character.escape.regex.rascal
