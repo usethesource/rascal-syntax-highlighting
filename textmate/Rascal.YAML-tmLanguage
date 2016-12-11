@@ -63,7 +63,7 @@ repository:
     -  name: variable.other.escaped-keyword.rascal
        match: '\\(syntax|keyword|lexical|break|continue|finally|private|fail|filter|if|tag|extend|append|non-assoc|assoc|test|anno|layout|data|join|it|bracket|in|import|all|solve|try|catch|notin|else|insert|switch|return|case|while|throws|visit|for|assert|default|map|alias|any|module|mod|public|one|throw|start|value|loc|node|num|type|bag|int|rat|rel|lrel|real|tuple|str|bool|void|datetime|set|map|list)'
     -  name: string.other.url.rascal
-       match: "\\|([0-9a-z_A-Z.-_~:/?#\\[\\]@!$&'()*+,;=`])+\\|" # 
+       match: "\\|([0-9a-z_A-Z.\\-_~:/?#\\[\\]@!$&'()*+,;=`])+\\|" # 
        captures:
          '1': {name: markup.underline.link.rascal}
   comment:
@@ -111,7 +111,7 @@ repository:
          - include: '#syntax_escape'
   annotation:
     patterns:
-    -  name: meta.annotation.block.rascal
+    -  name: comment.block.annotation.rascal
        begin: (@[^ {]+)({)
        beginCaptures:
          '1': {name: storage.type.annotation.block.rascal}

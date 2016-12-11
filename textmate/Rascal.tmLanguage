@@ -48,7 +48,7 @@
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>meta.annotation.block.rascal</string>
+					<string>comment.block.annotation.rascal</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -420,7 +420,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\|([0-9a-z_A-Z.-_~:/?#\[\]@!$&amp;'()*+,;=`])+\|</string>
+					<string>\|([0-9a-z_A-Z.\-_~:/?#\[\]@!$&amp;'()*+,;=`])+\|</string>
 					<key>name</key>
 					<string>string.other.url.rascal</string>
 				</dict>
