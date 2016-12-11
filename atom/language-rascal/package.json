@@ -1,0 +1,14 @@
+{
+  "name": "language-rascal",
+  "version": "0.1.0",
+  "description": "Atom syntax high-lighting for the Rascal meta-programming language",
+  "keywords": [
+  ],
+  "repository": "https://github.com/usethesource/rascal-syntax-highlighting",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
