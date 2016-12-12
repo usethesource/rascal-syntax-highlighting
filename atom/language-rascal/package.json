@@ -5,7 +5,7 @@
   "keywords": [
   ],
   "repository": "https://github.com/usethesource/rascal-syntax-highlighting",
-  "license": "MIT",
+  "license": "BSD2",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
