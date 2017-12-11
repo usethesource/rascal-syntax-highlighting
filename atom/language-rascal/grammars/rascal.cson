@@ -59,7 +59,7 @@ repository:
   regex:
     patterns: [
       {
-        begin: "/(?!/|*)"
+        begin: "/(?!/|\*)"
         end: "/([dims]*)"
         endCaptures:
           "1":
